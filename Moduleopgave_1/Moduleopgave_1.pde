@@ -1,47 +1,54 @@
+public Staaf[] stafen;
+public int tussenAfstand;
+public int aantalStreepjes;
 void setup(){
-  //variable declaratie
-  int breedte = 500;
-  int hoogte = 400;
-  int tussenAfstand = 50;
-  int agendaTussen = 40;
+  frame.setResizable(true);
   
-  Staaf[] stafen = new Staaf[]{
-    new Staaf(100, "Staaf 1", color(255, 0, 0)),
-    new Staaf(200, "Staaf 2", color(0, 255, 0)),
-    new Staaf(400, "Staaf 3", color(0, 0, 255))
+  size(500, 600);
+  
+   stafen = new Staaf[]{
+    new Staaf(100, "Koekjes", color(255, 0, 0)),
+    new Staaf(200, "Stroopwafels", color(0, 255, 0)),
+    new Staaf(900, "Cupcakes", color(0, 0, 255))
   };
   
-  //tekenen
-  size(breedte, hoogte);
-  background(255, 255, 255);
-  int hoogste = 0;
-  for(Staaf staaf : stafen){
-      if(staaf.hoogte > hoogste)
-          hoogste = staaf.hoogte;
-  }
+  tussenAfstand = 50;
+  aantalStreepjes = 18;
+}
+
+void draw(){
   
-  float hoogteFactor = (hoogte / 4*3.0) / hoogste;
-  println(hoogteFactor);
-  int staafBreedte = (breedte-tussenAfstand) / stafen.length - tussenAfstand;
+  int hoogsteStaaf = 0;
+  for(Staaf staaf : stafen){
+      if(staaf.hoogte > hoogsteStaaf)
+          hoogsteStaaf = staaf.hoogte;
+  }
+  float vergrotingsfactor = (height*0.75) / hoogsteStaaf;
+  int staafBreedte = (width-tussenAfstand) / stafen.length - tussenAfstand;
+  int tussenStreepjes = height/aantalStreepjes;
+  
+  background(255, 255, 255);
+
+  
   int i = 0;
-  float hoosteGetekent = 0;
+
   for(Staaf staaf : stafen){
       fill(staaf.kleur);
-      float curHoogte = (staaf.hoogte * hoogteFactor);
-      if(curHoogte > hoosteGetekent)
-          hoosteGetekent = curHoogte;
-      rect(tussenAfstand + staafBreedte*i + tussenAfstand*i, hoogte-curHoogte, staafBreedte, curHoogte);
+      int curHoogte = (int)(staaf.hoogte * vergrotingsfactor);
+      int x = tussenAfstand + staafBreedte*i + tussenAfstand*i;
+      int y = height-curHoogte;
+      rect(x, y, staafBreedte, curHoogte);
+      fill(0, 0, 0);
+      text(staaf.titel + " : " + staaf.hoogte, x, y-1);
       i++;
   }
-  int aantalStreepjes = hoogte/agendaTussen;
-  println(aantalStreepjes);
-  float streepjeStapgrote = hoosteGetekent/3*4/aantalStreepjes;
   
-  for(int j = 1; j < aantalStreepjes; j++){
-     line(2, hoogte - j*agendaTussen, 7, hoogte - j*agendaTussen);
-     text("" + j*streepjeStapgrote, 2, hoogte - j*agendaTussen);
+  int streepjeStapgrote = (int)(tussenStreepjes / vergrotingsfactor);
+  
+  for(int j = 0; j < aantalStreepjes; j++){
+     line(2, height - j*tussenStreepjes, 7, height - j*tussenStreepjes);
+     text(j*streepjeStapgrote, 2, height - j*tussenStreepjes-1);
   }
-  
 }
 
 class Staaf {
@@ -52,7 +59,7 @@ class Staaf {
   
   Staaf(int hoogte, String title, color kleur){
     this.hoogte = hoogte;
-    this.titel = titel;
+    this.titel = title;
     this.kleur = kleur;
   }
   
