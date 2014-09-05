@@ -5,6 +5,7 @@ void setup() {
   size(600, 800);
   theControl = new ControlP5(this);
   createNumberBoxes(theControl);
+  frame.setResizable(true);
 }
 
 void draw() {
