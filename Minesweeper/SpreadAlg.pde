@@ -3,54 +3,70 @@ import java.util.HashSet;
 import java.util.Set;
 
 public void spread(int row, int col){
+    //de punten die nu gechecked worden.
     Set<Point> lastChecked = new HashSet<Point>();
+    //de punten die in de volgende ronden worden gechecked.
     Set<Point> toCheck = new HashSet<Point>();
     
+    //houd bij welke coordinaten al bekeken zijn.
     boolean[][] checked = new boolean[rows][colomns];  //defalut value is false;
     
     lastChecked.add(new Point(row, col));
-    println("starting scan...");
     while(true){
       toCheck.clear();
-      println("loop 1");
       for(Point p : lastChecked){
-        println("loop 2: " + p);
-         for(Point q : getPointsAround(p)){
-             println("loop 3: " + q);
-             if(isOutOfBounds(q)){
-                 println("this one is out of bounds!");
+         //eerst de blokken links, recht, boven en onder bekijken
+         //Als deze geen bom bevat, dan wordt hij geopend.
+         //als het block daarnaa geen cijfer bevat, dan wordt
+         //het punt toegevoegd aan het toCheck array.
+         for(Point q : getBlocksAround(p)){
+             if(isOutOfBounds(q))
                  continue;
-             }
-             
              if(blocks[q.x][q.y] == COVERED_EMPTY){
                  blocks[q.x][q.y] = getBlockNumber(q.x, q.y);
-                 println("this one is covered and empty, opening.... ping! " + blocks[q.x][q.y]);
-                 if(blocks[q.x][q.y] == OPEN_EMPTY){
-                     println("Ther was no number, so we can check if he has already been checked...");
-                     if(!checked[q.x][q.y]){
-                         println("adding to toCheck arra...");
-                         toCheck.add(q);
-                      }
+                 if(blocks[q.x][q.y] == OPEN_EMPTY && !checked[q.x][q.y]){
+                       toCheck.add(q);
                  }
              }
              checked[q.x][q.y] = true;
          }
+         //daarnaa worden alle hoeken bekeken.
+         //als een hoek na opening een cijfer zou 
+         //bevatten, dan wordt hij geopend.
+         for(Point q : getCornersAround(p)){
+             if(isOutOfBounds(q))
+                 continue;
+             if(blocks[q.x][q.y] == COVERED_EMPTY){
+                 int newNr = getBlockNumber(q.x, q.y);
+                 if(newNr != OPEN_EMPTY)
+                     blocks[q.x][q.y] = newNr;
+             }
+             
+         }
       }
       lastChecked = new HashSet<Point>(toCheck);
+      //als er niks meer te checken valt, dan zijn we klaar!
       if(lastChecked.size() == 0)
          break;
     }
     
 }
 
-private ArrayList<Point> getPointsAround(Point p){
+private ArrayList<Point> getBlocksAround(Point p){
     ArrayList<Point> o = new ArrayList<Point>();
   
-    o.add(new Point(p.x+1, p.y+1));
     o.add(new Point(p.x+1, p.y));
     o.add(new Point(p.x, p.y+1));
     o.add(new Point(p.x-1, p.y));
     o.add(new Point(p.x, p.y-1));
+  
+    return o;
+}
+
+private ArrayList<Point> getCornersAround(Point p){
+    ArrayList<Point> o = new ArrayList<Point>();
+  
+    o.add(new Point(p.x+1, p.y+1));
     o.add(new Point(p.x-1, p.y-1));
     o.add(new Point(p.x-1, p.y+1));
     o.add(new Point(p.x+1, p.y-1));
