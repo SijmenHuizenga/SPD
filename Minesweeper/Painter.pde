@@ -7,7 +7,7 @@ void paint(){
         rect((row+1)*blockSize, colomn*blockSize+blockSize, blockSize, blockSize);
         break;
       case COVERED_BOM: 
-        fill(255, 100, 100);
+        fill(100, 100, 100);
         rect((row+1)*blockSize, colomn*blockSize+blockSize, blockSize, blockSize);
         break;
       case FLAGGED_BOM:
@@ -49,7 +49,7 @@ void paint(){
         rect((row+1)*blockSize, colomn*blockSize+blockSize, blockSize, blockSize);
         fill(255, 255, 255);
         textSize(blockSize);
-        text(nr, (row+1)*blockSize+5, (colomn+2)*blockSize-5);
+        text(nr, (row+1)*blockSize+2, (colomn+2)*blockSize-2);
       }
     }
   } 
