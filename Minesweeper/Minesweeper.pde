@@ -1,8 +1,10 @@
 import java.util.Random;
+import java.awt.event.KeyEvent;
 
 int[][] blocks = new int[rows][colomns];  //row, colomn
 PImage bom_exploded, bom_found, bom_notfound, vlag;
 boolean running = true;
+boolean debug = false;
 
 void setup() {
   bom_exploded = loadImage("bom_exploded.png");
@@ -60,6 +62,10 @@ void mousePressed() {
           blocks[row][col] = COVERED_EMPTY;
       }
   }
+}
+void keyPressed(){
+  if(keyCode == KeyEvent.VK_D)
+    debug = !debug;
   
 }
 
