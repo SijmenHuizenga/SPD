@@ -1,41 +1,48 @@
+int coveredColor = color(100, 100, 100);
+int openColor = color(200, 200,200);
+int bombDebug = color(255, 100, 100);
+
 void paint(){
  for (int row = 0; row<rows; row++) {
     for (int colomn = 0; colomn<colomns; colomn++) {
       switch(blocks[row][colomn]) {
       case COVERED_EMPTY: 
-        fill(100, 100, 100);
+        fill(coveredColor);
         rect((row+1)*blockSize, colomn*blockSize+blockSize, blockSize, blockSize);
         break;
       case COVERED_BOM: 
-        fill(100, 100, 100);
+        if(debug)
+          fill(bombDebug);
+        else
+          fill(coveredColor);
         rect((row+1)*blockSize, colomn*blockSize+blockSize, blockSize, blockSize);
         break;
       case FLAGGED_BOM:
-        fill(100, 100, 100);
+        fill(coveredColor);
         rect((row+1)*blockSize, colomn*blockSize+blockSize, blockSize, blockSize);
         image(vlag, (row+1)*blockSize, (1+colomn)*blockSize, blockSize, blockSize);
         break;
       case FLAGGED_EMPTY:
-        fill(100, 100, 100);
+        fill(coveredColor);
         rect((row+1)*blockSize, colomn*blockSize+blockSize, blockSize, blockSize);
         image(vlag, (row+1)*blockSize, (1+colomn)*blockSize, blockSize, blockSize);
         break;
       case OPEN_EMPTY:
-        fill(200, 200, 200);
+        fill(openColor);
         rect((row+1)*blockSize, colomn*blockSize+blockSize, blockSize, blockSize);
         break;
       case EXPLODED:
-        fill(200, 200, 200);
+        fill(openColor);
         rect((row+1)*blockSize, colomn*blockSize+blockSize, blockSize, blockSize);
         image(bom_exploded, (row+1)*blockSize, (1+colomn)*blockSize, blockSize, blockSize);
         break;
       case FOUND:
-        fill(200, 200, 200);
+        fill(openColor);
         rect((row+1)*blockSize, colomn*blockSize+blockSize, blockSize, blockSize);
         image(bom_found, (row+1)*blockSize, (1+colomn)*blockSize, blockSize, blockSize);
         break;
       case NOTFOUND:
-        fill(200, 200, 200);
+        fill(openColor);
         rect((row+1)*blockSize, colomn*blockSize+blockSize, blockSize, blockSize);
         image(bom_notfound, (row+1)*blockSize, (1+colomn)*blockSize, blockSize, blockSize);
         break;
