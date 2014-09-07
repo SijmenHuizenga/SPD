@@ -10,9 +10,9 @@ void setup(){
   
   if(hoogte % 2 == 0)
       hoogte++;
-  
+
   size(breedte, hoogte);
- 
+
   line(width/2, 0, width/2, height-1);
   line(0, height/2, width-1, height/2);
   

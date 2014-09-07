@@ -22,8 +22,8 @@ static final int EXPLODED = 20;
 static final int FOUND = 21;
 static final int NOTFOUND = 22;
 
-static final int rows = 20;
+static final int rows = 40;
 static final int colomns = 20;
 
-static final int blockSize = 16;
+static final int blockSize = 30;
 static final int persentage = 10;
