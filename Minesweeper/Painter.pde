@@ -1,8 +1,13 @@
 int coveredColor = color(100, 100, 100);
 int openColor = color(200, 200,200);
 int bombDebug = color(255, 100, 100);
+int background = color(200, 200,200);
 
 void paint(){
+ background(background);
+ textSize(15);
+ fill(0, 0, 0);
+ text(getTime(), 5, 15);
  for (int row = 0; row<rows; row++) {
     for (int colomn = 0; colomn<colomns; colomn++) {
       switch(blocks[row][colomn]) {

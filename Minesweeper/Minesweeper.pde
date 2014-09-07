@@ -28,6 +28,7 @@ void startGame(){
         blocks[row][colomn] = COVERED_EMPTY;
     }
   }
+  startTimer();
 }
 
 void mousePressed() {
@@ -41,6 +42,7 @@ void mousePressed() {
   if(mouseButton == LEFT){
       if(nr == COVERED_BOM){
         running = false;
+        stopTimer();
         for (int roww = 0; roww<rows; roww++) {
           for (int colomn = 0; colomn<colomns; colomn++) {
               if(blocks[roww][colomn] == COVERED_BOM)
