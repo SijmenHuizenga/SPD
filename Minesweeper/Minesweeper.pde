@@ -11,8 +11,12 @@ void setup() {
   bom_found = loadImage("bom_found.png");
   bom_notfound = loadImage("bom_notfound.png");
   vlag = loadImage("vlag.png");
+  startGame();
+}
 
-  size((colomns+2)*blockSize, (rows+2)*blockSize);
+void startGame(){
+  running = true;
+  size((rows+2)*blockSize, (colomns+2)*blockSize);
   frame.setResizable(true);
   Random rand = new Random();
   for (int row = 0; row<rows; row++) {
@@ -66,7 +70,8 @@ void mousePressed() {
 void keyPressed(){
   if(keyCode == KeyEvent.VK_D)
     debug = !debug;
-  
+  if(keyCode == KeyEvent.VK_R)
+    startGame();
 }
 
 int getBlockNumber(int row, int col) {
