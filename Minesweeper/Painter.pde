@@ -8,6 +8,11 @@ void paint(){
  textSize(15);
  fill(0, 0, 0);
  text(getTime(), 5, 15);
+ if(youWon){
+   fill(randomColor());
+   text("You finished the game!!!!!!!", width-200, 15);
+ 
+ }
  for (int row = 0; row<rows; row++) {
     for (int colomn = 0; colomn<colomns; colomn++) {
       switch(blocks[row][colomn]) {
@@ -65,4 +70,8 @@ void paint(){
       }
     }
   } 
+}
+Random rand = new Random();
+int randomColor(){
+   return color(rand.nextInt(255), rand.nextInt(255), rand.nextInt(255)); 
 }

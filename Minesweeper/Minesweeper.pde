@@ -5,6 +5,7 @@ int[][] blocks = new int[rows][colomns];  //row, colomn
 PImage bom_exploded, bom_found, bom_notfound, vlag;
 boolean running = true;
 boolean debug = false;
+boolean youWon = false;
 
 void setup() {
   bom_exploded = loadImage("bom_exploded.png");
@@ -95,5 +96,45 @@ int hasBlockBom(int row, int col) {
 
 void draw() {
   paint();
+  checkDone();
+}
+
+void checkDone(){
+  if(!running)
+    return;
+  if(bombAmount() == closedBlocks()){
+     running = false;
+     youWon = true;
+     stopTimer(); 
+     for (int row = 0; row<rows; row++)
+        for (int colomn = 0; colomn<colomns; colomn++)
+           if(blocks[row][colomn] == COVERED_BOM)
+              blocks[row][colomn] = FLAGGED_BOM;
+  }
+}
+
+int bombAmount(){
+  int out = 0;
+  for (int row = 0; row<rows; row++) {
+    for (int colomn = 0; colomn<colomns; colomn++) {
+      if(blocks[row][colomn] == COVERED_BOM || blocks[row][colomn] == FLAGGED_BOM){
+         out++;
+      }
+    }
+  }
+  return out;
+}
+
+int closedBlocks(){
+  int out = 0;
+  for (int row = 0; row<rows; row++) {
+    for (int colomn = 0; colomn<colomns; colomn++) {
+      if(blocks[row][colomn] == COVERED_BOM || blocks[row][colomn] == COVERED_EMPTY || 
+            blocks[row][colomn] == FLAGGED_BOM || blocks[row][colomn] == FLAGGED_EMPTY){
+          out++;
+      }
+    }
+  }
+  return out;
 }
 
