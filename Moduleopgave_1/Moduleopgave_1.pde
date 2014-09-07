@@ -9,8 +9,7 @@ void setup(){
    stafen = new Staaf[]{
     new Staaf(100, "Koekjes", color(255, 0, 0)),
     new Staaf(200, "Stroopwafels", color(0, 255, 0)),
-    new Staaf(900, "Cupcakes", color(0, 0, 255)),
-    new Staaf(850, "Chocolade", color(88, 20, 20))
+    new Staaf(900, "Cupcakes", color(0, 0, 255))
   };
   
   tussenAfstand = 50;
@@ -18,7 +17,8 @@ void setup(){
 }
 
 void draw(){
-  //////////rekenen
+  /////////////////rekenen/////////////////////
+  
   int hoogsteStaaf = 0;
   int gemiddelde = 0;
   for(Staaf staaf : stafen){
@@ -58,8 +58,6 @@ void draw(){
       text(staaf.titel + " : " + staaf.hoogte, x, y-1);
       i++;
   }
-  
-  
 }
 
 class Staaf {
