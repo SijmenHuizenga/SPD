@@ -25,5 +25,5 @@ static final int NOTFOUND = 22;
 static final int rows = 16;  //hier staart ROW, maar dit is het aantal colomns
 static final int colomns = 16;  //hier staatCOLOMNS, maar dit is het aantal rows
 
-static final int blockSize = 16;
-static final int persentage = 15;
+static final int blockSize = 40;
+static final int persentage = 20;
