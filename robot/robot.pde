@@ -22,10 +22,11 @@ int gridHeight= 20;
 
 void setup(){
   size(gridWidth*blockSize, gridHeight*blockSize);
-  String name = (String)JOptionPane.showInputDialog(null, "What  is your name?", "Name?", JOptionPane.QUESTION_MESSAGE);
+  String name = (String)JOptionPane.showInputDialog(null, "What is your name?", "Name?", JOptionPane.QUESTION_MESSAGE);
+  String ip = (String)JOptionPane.showInputDialog(null, "What the server ip?", "ip?", JOptionPane.QUESTION_MESSAGE);
   if(name == null || name.equals(""))
     System.exit(0);
-  connect(name, "195.169.163.86"); 
+  connect(name, ip); 
   setRobotX(5);
   setRobotY(5);
 }
@@ -38,7 +39,7 @@ void draw(){
   fill(0, 255, 0);
   rect(getRobotX()*blockSize, getRobotY()*blockSize, blockSize, blockSize);
   
-  for(Robot r : getOthers()){
+  for(robot.common.Robot r : getOthers()){
     fill(255);
     text(r.name, r.x*blockSize, r.y*blockSize);
     fill(255, 0, 0);
