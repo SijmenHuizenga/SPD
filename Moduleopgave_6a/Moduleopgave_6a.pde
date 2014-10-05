@@ -23,7 +23,7 @@ void drawRow(int startY){
 void setup(){
   jonge = loadImage("jonge.png");
   meisje = loadImage("meisje.png");
-  size(600, 900);
+  size(600, 300);
   while( curRow*imgHeight < height ){
       drawRow(curRow*imgHeight);
       curRow ++;

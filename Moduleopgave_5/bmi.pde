@@ -20,18 +20,18 @@ void tekenBMILegenda(){
 }
 
 void tekenBMIBalk(){
-  float bmp = berekenBMI();
-  if(bmp < ondergewicht){
+  float bmi = berekenBMI();
+  if(bmi < ondergewicht){
     fill(255, 106, 0);
-  }else if(bmp < normaalgewicht){
+  }else if(bmi < normaalgewicht){
     fill(0, 255, 0);
-  }else if(bmp < overgewicht){
+  }else if(bmi < overgewicht){
     fill(255, 106, 0);
   }else{
     fill(255, 0, 0);
   }
   stroke(255, 255, 255);
   
-  int balkHoogte = (int)constrain(bmp*schermFactor, 0, height);
+  int balkHoogte = (int)constrain(bmi*schermFactor, 0, height);
   rect(width/3, height-balkHoogte, width/3, balkHoogte); 
 }
