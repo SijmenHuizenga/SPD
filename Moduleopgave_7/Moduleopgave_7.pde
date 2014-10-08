@@ -1,5 +1,5 @@
 
-String fileName = "cijfers_groot.txt";
+String fileName = "cijfers_klein.txt";
 
 int grafiekHoogte = 270;
 int grafiekBreedte = 360;
