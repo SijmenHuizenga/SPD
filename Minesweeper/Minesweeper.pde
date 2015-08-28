@@ -7,6 +7,8 @@ boolean running = true;
 boolean debug = false;
 boolean youWon = false;
 
+boolean firstClick = true;
+
 void setup() {
   bom_exploded = loadImage("bom_exploded.png");
   bom_found = loadImage("bom_found.png");
@@ -17,13 +19,25 @@ void setup() {
 
 void startGame(){
   running = true;
+  youWon = false;
+  firstClick = true;
   size((rows+2)*blockSize, (colomns+2)*blockSize);
   frame.setResizable(true);
+  startTimer();
+  for (int row = 0; row<rows; row++) {
+    for (int colomn = 0; colomn<colomns; colomn++) {
+      blocks[row][colomn] = COVERED_EMPTY;
+    }
+  }
+}
+
+void generateLevel(int emptyRow, int emptyCol){
   Random rand = new Random();
   for (int row = 0; row<rows; row++) {
     for (int colomn = 0; colomn<colomns; colomn++) {
-      int r = rand.nextInt(100);
-      if (r < persentage)
+      if(row == emptyRow && colomn == emptyCol)
+        blocks[row][colomn] = COVERED_EMPTY;
+      else if (rand.nextInt(100) < persentage)
         blocks[row][colomn] = COVERED_BOM;
       else
         blocks[row][colomn] = COVERED_EMPTY;
@@ -39,6 +53,10 @@ void mousePressed() {
   int col = mouseY/blockSize-1;
   if (row < 0 || row >= rows || col < 0 || col >= colomns)
     return;
+  if(firstClick){
+    generateLevel(row, col);
+    firstClick = false;
+  }
   int nr = blocks[row][col];
   if(mouseButton == LEFT){
       if(nr == COVERED_BOM){

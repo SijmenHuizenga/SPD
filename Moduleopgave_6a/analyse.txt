@@ -1,0 +1,40 @@
+als eerste moeten de afbeeldingen worden geladen:
+PImage jonge  = loadImage("jonge.png");
+PImage meisje = loadImage("meisje.png");
+
+dan moet er bijgehouden worden wat de huidigge row is.
+en hoe hoog en breed één image is.
+int imgHeight;
+int imgWidht;
+int curRow;
+
+void drawRow(int startY);
+deze functie tekent één row met vrouwtjes en mannetjes,
+de hoogte waar hij begint te tekenen is de parameter startY.
+
+Dus zolang de laatste persoon een vrouwtje is, teken een nieuw kind.
+om de afbeeldingen op de goede plek te zetten, moet bijgehouden worden
+hoeveel kinderen er al zijn getekend.
+
+int kindAmount = 0;
+
+lastPersonMale = false;
+while(lastPersonMale == false){
+   if(random(1) == 1){
+      lastPersonMale = false;   //maak een meisje
+      image(meisje, kindAmount * imgWidht, startY);
+   }else{
+      lastPersonMale = true;    //maak een jongen
+      image(jonge, kindAmount * imgWidht, startY);
+   }
+   kindAmount++;
+}
+
+
+zolang er een nieuwe row getekent kan worden die 
+nog zichtbaar is op het scherm, teken een nieuwe row.
+
+while( curRow*imgHeight < height ){
+    drawRow(curRow*imgHeight);
+    curRow ++;
+}

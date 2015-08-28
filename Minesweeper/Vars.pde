@@ -27,3 +27,4 @@ static final int colomns = 16;  //hier staatCOLOMNS, maar dit is het aantal rows
 
 static final int blockSize = 16;
 static final int persentage = 15;
+
